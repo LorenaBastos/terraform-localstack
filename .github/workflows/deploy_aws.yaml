@@ -1,38 +1,45 @@
-name: Deploy on AWS
+name: Deploy on LocalStack
 
 on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-  services:
+    services:
       localstack:
-        runs-on: ubuntu-latest
         image: localstack/localstack:latest
         ports:
           - 4566:4566
         env:
           SERVICES: ec2,s3,dynamodb
-  steps:
-  - name: Show localstack logs
-    run: localstack logs | tee localstack.log
+        options: >-
+          --health-cmd="curl -s http://localhost:4566/_localstack/health | grep '\"s3\": \"running\"'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=20
 
-  - name: Checkout repo
-    uses: actions/checkout@v3
+    steps:
 
-  - name: Set up Terraform
-    uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.5.7
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-  - name: Terraform Init
-    run: terraform init
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
 
-  - name: Terraform Plan
-    run: terraform plan
-  
-  - name: Terraform Apply
-    run: terraform apply -auto-approve
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Show LocalStack Logs
+        run: docker logs $(docker ps --filter ancestor=localstack/localstack --format "{{.ID}}")
