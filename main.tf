@@ -1,17 +1,14 @@
-resource "aws_instance" "webserver" {
-  ami           = var.ami
-  instance_type = "t3.micro"
-
-  tags = {
-    Name = "Terraform-Test"
-  }
+module "dev_module" {
+ source  = "./dev"
+ version = "1.0.0"
 }
 
-resource "aws_instance" "api-server" {
-  ami           = var.ami
-  instance_type = "t2.micro"
+module "qa_module" {
+ source  = "./qa"
+ version = "1.0.0"
+}
 
-  tags = {
-    Name = "Terraform-Test-2"
-  }
+module "prod_module" {
+ source  = "./prod"
+ version = "1.0.0"
 }
