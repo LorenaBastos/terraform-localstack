@@ -18,7 +18,8 @@ jobs:
           SERVICES: ec2,s3,dynamodb
   steps:
   - name: Show localstack logs
-    run: localstack logs | tee localstack.log
+    run: |
+      localstack logs | tee localstack.log
 
   - name: Checkout repo
     uses: actions/checkout@v3
