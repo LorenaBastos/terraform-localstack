@@ -1,14 +1,14 @@
 module "dev_module" {
- source  = "./dev"
+ source  = "../dev"
  version = "1.0.0"
 }
 
 module "qa_module" {
- source  = "./qa"
+ source  = "../qa"
  version = "1.0.0"
 }
 
 module "prod_module" {
- source  = "./prod"
+ source  = "../prod"
  version = "1.0.0"
 }
