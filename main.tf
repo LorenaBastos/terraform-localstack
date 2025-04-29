@@ -1,11 +1,11 @@
 module "dev_module" {
- source  = "./dev"
+ source  = "./modules/dev"
 }
 
 module "qa_module" {
- source  = "./qa"
+ source  = "./modules/qa"
 }
 
 module "prod_module" {
- source  = "./prod"
+ source  = "./modules/prod"
 }
