@@ -17,6 +17,7 @@ jobs:
         env:
           SERVICES: ec2,s3,dynamodb
   steps:
+  
   - name: Show localstack logs
     run: |
       localstack logs | tee localstack.log
