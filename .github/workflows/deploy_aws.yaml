@@ -9,28 +9,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    services:
-      localstack:
-        image: localstack/localstack:latest
-        ports:
-          - 4566:4566
-        env:
-          SERVICES: ec2,s3,dynamodb
-        options: >-
-          --health-cmd="curl -s http://localhost:4566/_localstack/health"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=20
-
     steps:
 
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Start LocalStack
+        run: |
+          pip install localstack
+          docker pull localstack/localstack
+          localstack start -d
+          echo "Waiting for LocalStack startup..."
+          localstack wait -t 30
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.5.7
 
       - name: Terraform Init
         run: terraform init
