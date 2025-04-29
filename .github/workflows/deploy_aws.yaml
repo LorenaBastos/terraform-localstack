@@ -17,7 +17,7 @@ jobs:
         env:
           SERVICES: ec2,s3,dynamodb
         options: >-
-          --health-cmd="curl -s http://localhost:4566/_localstack/health | grep '\"s3\": \"running\"'"
+          --health-cmd="curl -s http://localhost:4566/_localstack/health"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=20
