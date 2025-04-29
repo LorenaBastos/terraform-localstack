@@ -1,0 +1,9 @@
+---
+- name: Install Apache2 using Ansible Playbook
+  hosts: 127.0.0.1 #here ensure that node instance name is correct or not
+  become: true
+  tasks:
+  - name: Install Apache2 package
+    package:
+      name: apache2
+      state: present
