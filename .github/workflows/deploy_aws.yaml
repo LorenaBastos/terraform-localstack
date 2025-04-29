@@ -16,15 +16,16 @@ jobs:
           - 4566:4566
         env:
           SERVICES: ec2,s3,dynamodb
-        options: --health-cmd="curl -s http://localhost:4566/_localstack/health | grep '\"s3\": \"running\"'" --health-interval=10s --health-timeout=5s --health-retries=20
+        options: >-
+          --health-cmd="curl -s http://localhost:4566/_localstack/health | grep '\"s3\": \"running\"'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=20
 
     steps:
+
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      - name: Show localstack logs
-        run: |
-          docker logs $(docker ps --filter ancestor=localstack/localstack:latest -q)
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
@@ -39,3 +40,6 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
+      - name: Show LocalStack Logs
+        run: docker logs $(docker ps --filter ancestor=localstack/localstack --format "{{.ID}}")
