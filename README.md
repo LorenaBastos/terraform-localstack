@@ -14,3 +14,15 @@ The repository uses GitHub Actions to automate:
 - Ansible playbook validation.
 - LocalStack environment testing.
 - Workflow files are under .github/workflows/.
+- Infracost – FinOps tool to estimate and track cloud infrastructure costs in pull requests
+
+
+## 💰FinOps with Infracost
+This project integrates Infracost to show cloud cost changes in pull requests. This helps drive financial accountability and decision-making.
+
+**Example PF Comment:**
+```
+Monthly cost estimate for this change: +$25.00  
+Previous cost: $75.00  
+New cost: $100.00
+```
