@@ -41,28 +41,5 @@ resource "aws_athena_named_query" "create_table" {
   name      = "vpc_appsec_logs"
   workgroup = "primary"
   database  = aws_athena_database.appsec.name
-  query     = <<EOF
-  CREATE EXTERNAL TABLE IF NOT EXISTS vpc_appsec_flow_logs (
-  version int,
-  account string,
-  interfaceid string,
-  sourceaddress string,
-  destinationaddress string,
-  sourceport int,
-  destinationport int,
-  protocol int,
-  numpackets int,
-  numbytes bigint,
-  starttime int,
-  endtime int,
-  action string,
-  logstatus string
-)
-PARTITIONED BY (dt string)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY ' '
-LOCATION 's3://vpc-flow-logs-dev/AWSLogs/12345678/vpcflowlogs/us-east-1'
-TBLPROPERTIES ("skip.header.line.count"="1");
-EOF
 }
 
