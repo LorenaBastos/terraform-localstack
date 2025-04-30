@@ -3,7 +3,7 @@
 resource "aws_s3_bucket" "vpc_flow_logs" {
   bucket = "vpc-flow-logs-dev"
 
-  versioning {
+  aws_s3_bucket_versioning {
     enabled = true
   }
 
@@ -18,7 +18,7 @@ resource "aws_flow_log" "appsec-dev" {
   log_destination      = aws_s3_bucket.vpc_flow_logs.arn
   log_destination_type = "s3"
   traffic_type         = "ALL"
-  vpc_id               = aws_vpc.vpc-dev.id
+  vpc_id               = aws_vpc.vpc-prod.id
   # Enable the new meta fields
   log_format = "$${version} $${vpc-id} $${subnet-id} $${instance-id} $${interface-id} $${account-id} $${type} $${srcaddr} $${dstaddr} $${srcport} $${dstport} $${protocol} $${packets} $${bytes} $${start} $${end} $${action} $${tcp-flags}"
 
