@@ -3,12 +3,15 @@
 resource "aws_s3_bucket" "vpc_flow_logs" {
   bucket = "vpc-flow-logs-dev"
 
-  aws_s3_bucket_versioning {
-    enabled = true
-  }
-
   lifecycle {
     prevent_destroy = true
+  }
+}
+
+resource "aws_s3_bucket_versioning" "versioning_bucket" {
+  bucket = aws_s3_bucket.vpc_flow_logs.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
