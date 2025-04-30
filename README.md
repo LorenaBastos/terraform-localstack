@@ -29,4 +29,4 @@ Previous cost: $75.00
 New cost: $100.00
 ```
 ## 🔐 Security & Compliance
-TFSec and Checkov automatically scan your Terraform templates to ensure compliance with security best practices.
+TFSec and Checkov automatically scan the Terraform templates to ensure compliance with security best practices.
