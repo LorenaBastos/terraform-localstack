@@ -13,11 +13,11 @@ This repository contains an Infrastructure as Code (IaC) project designed using 
 ## :arrows_counterclockwise: CI/CD with GitHub Actions
 The repository uses GitHub Actions to automate:
 
-- Terraform plan and apply on pull requests or merges.
-- Ansible playbook validation.
-- LocalStack environment testing.
-- Workflow files are under .github/workflows/.
-- Infracost – FinOps tool to estimate and track cloud infrastructure costs in pull requests
+```terraform.yml``` – Validates Terraform, runs plan, apply (optional).
+
+```finops-infracost.yml``` – Adds cost estimates in PRs.
+
+```security-checks.yml``` – Runs TFSec and Checkov for code security.
 
 ## 💰FinOps with Infracost
 This project integrates Infracost to show cloud cost changes in pull requests. This helps drive financial accountability and decision-making.
