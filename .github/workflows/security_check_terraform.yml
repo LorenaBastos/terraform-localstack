@@ -3,9 +3,6 @@ name: Terraform Security Scan
 on:
   pull_request:
     types: [opened, synchronize, closed]
-  push:
-    branches:
-      - main
 
 jobs:
   security_check:
