@@ -30,16 +30,3 @@ resource "aws_flow_log" "appsec-dev" {
   }
 }
 
-# create a new athena database from our vpc logs s3 bucket
-resource "aws_athena_database" "appsec" {
-  name   = "appsec"
-  bucket = aws_s3_bucket.vpc_flow_logs.id
-}
-
-# create athena query table
-resource "aws_athena_named_query" "create_table" {
-  name      = "vpc_appsec_logs"
-  workgroup = "primary"
-  database  = aws_athena_database.appsec.name
-}
-
