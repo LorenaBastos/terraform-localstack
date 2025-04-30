@@ -9,27 +9,9 @@ variable "ami" {
  }
 }
  
-variable "type" {
- type        = string
- description = "Instance type for the EC2 instance"
- default     = "t2.micro"
- sensitive   = true
-}
- 
-variable "tags" {
- type = object({
-   name = string
-   env  = string
- })
- description = "Tags for the EC2 instance"
- default = {
-   name = "My Virtual Machine"
-   env  = "Dev"
- }
-}
- 
-variable "subnet" {
- type        = string
- description = "Subnet ID for network interface"
- default     = "subnet-76a8163a"
+## Main Availability Zones
+variable "azs" {
+ type        = list(string)
+ description = "Availability Zones"
+ default     = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
 }

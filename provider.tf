@@ -13,6 +13,7 @@ provider "aws" {
   secret_key = "test"
   region = "us-east-1"
   endpoints {
+    vpc            = "http://localhost:4566"
     apigateway     = "http://localhost:4566"
     apigatewayv2   = "http://localhost:4566"
     cloudformation = "http://localhost:4566"
