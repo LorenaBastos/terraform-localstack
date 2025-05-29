@@ -2,10 +2,14 @@ name: Terraform Security Scan
 
 on:
   pull_request:
+<<<<<<< HEAD
     types: [opened]
   push:
     branches:
       - main
+=======
+    types: [opened, synchronize, closed]
+>>>>>>> 7420e9b965a993d166fa956ae3d6819a42bc5da7
 
 jobs:
   security_check:
