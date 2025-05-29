@@ -1,7 +1,7 @@
 name: Infracost
 on:
   pull_request:
-    types: [opened, synchronize, closed]
+    types: [opened]
   push:
     branches:
       - main
